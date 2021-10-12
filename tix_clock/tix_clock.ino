@@ -13,3 +13,11 @@ void loop() {
   // put your main code here, to run repeatedly:
 
 }
+void SetInputPins(int inputPins[], int numberOfInputPins)
+{
+  for (int i = 0; i < numberOfInputPins; i++)
+  {
+    pinMode(inputPins[i], INPUT);
+  }
+
+}
