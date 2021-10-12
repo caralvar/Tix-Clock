@@ -6,7 +6,7 @@ void SetInputPins(int[], int[]);
 
 void setup() {
   // put your setup code here, to run once:
-
+  SetInputPins(INPUT_PINS, NUMBER_OF_INPUT_PINS);
 }
 
 void loop() {
