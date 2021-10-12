@@ -4,6 +4,8 @@ const int CLOCK_PIN = 4;
 const int NUMBER_OF_OUTPUT_PINS = 3;
 int OUTPUT_PINS[] = {DATA_PIN, LATCH_PIN, CLOCK_PIN};
 
+void SetOutputPins(int[], int);
+
 void setup() 
 {
 
