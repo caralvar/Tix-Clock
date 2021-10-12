@@ -15,3 +15,11 @@ void loop()
 {
 
 }
+
+void SetOutputPins(int outputPins[], int numberOfPins);
+{
+  for (int i = 0; i < numberOfPins; i++)
+  {
+    pinMode(outputPins[i], OUTPUT);
+  }
+}
