@@ -8,7 +8,7 @@ void SetOutputPins(int[], int);
 
 void setup() 
 {
-
+  SetOutputPins(OUTPUT_PINS, NUMBER_OF_OUTPUT_PINS);
 }
 
 void loop() 
