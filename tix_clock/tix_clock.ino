@@ -8,7 +8,7 @@ void SetOutputPins(int[], int);
 
 void setup() 
 {
-      SetOutputPins(OUTPUT_PINS, NUMBER_OF_OUTPUT_PINS);
+    SetOutputPins(OUTPUT_PINS, NUMBER_OF_OUTPUT_PINS);
 }
 
 void loop() 
@@ -18,8 +18,8 @@ void loop()
 
 void SetOutputPins(int outputPins[], int numberOfPins);
 {
-  for (int i = 0; i < numberOfPins; i++)
-  {
+    for (int i = 0; i < numberOfPins; i++)
+    {
         pinMode(outputPins[i], OUTPUT);
-  }
+    }
 }
