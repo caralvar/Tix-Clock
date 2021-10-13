@@ -37,3 +37,16 @@ void SetOutputPins(int outputPins[], int numberOfPins)
         pinMode(outputPins[i], OUTPUT);
     }
 }
+
+void GiveMeRandomNumber()
+{
+    int GiveMeRandomNumber = 0;
+    int lowerLimit = 1;
+    int upperLimit = 100;
+
+    GiveMeRandomNumber = random(lowerLimit, upperLimit);
+    Serial.print("Numero random = ");
+    Serial.println(GiveMeRandomNumber);
+    delay(1000);
+    return GiveMeRandomNumber;
+}
