@@ -20,13 +20,14 @@ void SetOutputPins(int[], int);
 
 void setup() 
 {
+    Serial.begin(9600);
     SetInputPins(INPUT_PINS, NUMBER_OF_INPUT_PINS);
     SetOutputPins(OUTPUT_PINS, NUMBER_OF_OUTPUT_PINS);
 }
 
 void loop() 
 {
-
+    reloj();   
 }
   
 void SetInputPins(int inputPins[], int numberOfInputPins)
@@ -47,7 +48,6 @@ void SetOutputPins(int outputPins[], int numberOfPins)
 
 void reloj()
 {
-    
     s = s + 1;
     if(s == 60)
     {
@@ -76,4 +76,16 @@ void reloj()
     Serial.print("minutos unidades : ");
     Serial.println(minutosunidades);
     Serial.println("-------------------------------------------");
+    delay(1000);
+}
+
+void botones(){
+    if(digitalRead(INPUT_PINS[1]) == HIGH )
+    {
+        h = h + 1;
+    }
+    if(digitalRead(INPUT_PINS[0]) == HIGH)
+   {
+        m = m + 1;
+   }
 }
