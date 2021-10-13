@@ -44,3 +44,36 @@ void SetOutputPins(int outputPins[], int numberOfPins)
         pinMode(outputPins[i], OUTPUT);
     }
 }
+
+void reloj()
+{
+    
+    s = s + 1;
+    if(s == 60)
+    {
+        s = 0;
+        m= m + 1;
+    } 
+    if(m == 60)
+    {
+        m = 0;
+        h = h + 1;
+    }
+    if(h == 25)
+    { 
+        h = 0;
+    }
+    horadecimas = h / 10;
+    horaunidades = h % 10;
+    minutosdecimas = m / 10;
+    minutosunidades = m % 10;
+    Serial.print("Hora decimas : ");
+    Serial.println(horadecimas);
+    Serial.print("Hora unidades : ");
+    Serial.println(horaunidades);
+    Serial.print("minutos decimas : ");
+    Serial.println(minutosdecimas);
+    Serial.print("minutos unidades : ");
+    Serial.println(minutosunidades);
+    Serial.println("-------------------------------------------");
+}
