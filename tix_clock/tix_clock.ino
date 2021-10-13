@@ -30,7 +30,7 @@ void SetInputPins(int inputPins[], int numberOfInputPins)
     }
 }
 
-void SetOutputPins(int outputPins[], int numberOfPins);
+void SetOutputPins(int outputPins[], int numberOfPins)
 {
     for (int i = 0; i < numberOfPins; i++)
     {
