@@ -27,7 +27,8 @@ void setup()
 
 void loop() 
 {
-    reloj();   
+    reloj(); 
+    botones();
 }
   
 void SetInputPins(int inputPins[], int numberOfInputPins)
