@@ -10,11 +10,13 @@ int OUTPUT_PINS[] = {DATA_PIN, LATCH_PIN, CLOCK_PIN};
 
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
+int GiveMeRandomNumber(int, int);
 
 void setup() 
 {
     SetInputPins(INPUT_PINS, NUMBER_OF_INPUT_PINS);
     SetOutputPins(OUTPUT_PINS, NUMBER_OF_OUTPUT_PINS);
+    Serial.begin(9600);
 }
 
 void loop() 
@@ -38,15 +40,9 @@ void SetOutputPins(int outputPins[], int numberOfPins)
     }
 }
 
-void GiveMeRandomNumber()
+int GiveMeRandomNumber(int lowerLimit, int upperLimit)
 {
-    int GiveMeRandomNumber = 0;
-    int lowerLimit = 1;
-    int upperLimit = 100;
-
-    GiveMeRandomNumber = random(lowerLimit, upperLimit);
-    Serial.print("Numero random = ");
-    Serial.println(GiveMeRandomNumber);
-    delay(1000);
-    return GiveMeRandomNumber;
+    int randomNumber;
+    randomNumber = random(lowerLimit, upperLimit + 1);
+    return randomNumber;
 }
