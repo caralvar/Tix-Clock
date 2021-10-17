@@ -10,6 +10,7 @@ int OUTPUT_PINS[] = {DATA_PIN, LATCH_PIN, CLOCK_PIN};
 
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
+int AddOneBasedOnInput(int , int);
 
 void setup() 
 {
