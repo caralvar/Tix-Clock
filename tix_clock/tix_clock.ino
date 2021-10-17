@@ -7,19 +7,27 @@ const int LATCH_PIN = 3;
 const int CLOCK_PIN = 4;
 const int NUMBER_OF_OUTPUT_PINS = 3;
 int OUTPUT_PINS[] = {DATA_PIN, LATCH_PIN, CLOCK_PIN};
+int hours = 25;
+int tensHours;
+int unitsHours;
+
 
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
 
 void setup() 
 {
+    Serial.begin(9600);
     SetInputPins(INPUT_PINS, NUMBER_OF_INPUT_PINS);
     SetOutputPins(OUTPUT_PINS, NUMBER_OF_OUTPUT_PINS);
 }
 
 void loop() 
 {
-
+    tensHours = GetTensFromNumber(hours);
+    unitsHours = GetUnitsFromNumber(hours);
+    Serial.println(tensHours);
+    Serial.println(unitsHours);
 }
   
 void SetInputPins(int inputPins[], int numberOfInputPins)
@@ -36,4 +44,16 @@ void SetOutputPins(int outputPins[], int numberOfPins)
     {
         pinMode(outputPins[i], OUTPUT);
     }
+}
+int GetTensFromNumber(int number)
+{
+    int tensNumber;
+    tensNumber = number / 10;
+    return tensNumber;
+}
+int GetUnitsFromNumber(int number)
+{
+    int unitsNumber;
+    unitsNumber = number % 10;
+    return unitsNumber;  
 }
