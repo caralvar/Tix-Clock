@@ -21,10 +21,7 @@ void setup()
 
 void loop() 
 {
-    tensHours = GetTensFromNumber(hours);
-    unitsHours = GetUnitsFromNumber(hours);
-    Serial.println(tensHours);
-    Serial.println(unitsHours);
+  
 }
   
 void SetInputPins(int inputPins[], int numberOfInputPins)
