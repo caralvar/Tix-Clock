@@ -10,12 +10,16 @@ int OUTPUT_PINS[] = {DATA_PIN, LATCH_PIN, CLOCK_PIN};
 
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
-int AddOneBasedOnInput(int , int);
+int GetTensFromNumber(int);
+int GetUnitsFromNumber(int);
+int GiveMeRandomNumber(int, int);
+int AddOneBasedOnInput(int, int);
 
 void setup() 
 {
     SetInputPins(INPUT_PINS, NUMBER_OF_INPUT_PINS);
     SetOutputPins(OUTPUT_PINS, NUMBER_OF_OUTPUT_PINS);
+    Serial.begin(9600);
 }
 
 void loop() 
@@ -46,4 +50,25 @@ int AddOneBasedOnInput(int inputPin, int numberToUpdate)
         numberToUpdate++; 
     }
     return(numberToUpdate);
+}
+
+int GetTensFromNumber(int number)
+{
+    int tensNumber;
+    tensNumber = number / 10;
+    return tensNumber;
+}
+
+int GetUnitsFromNumber(int number)
+{
+    int unitsNumber;
+    unitsNumber = number % 10;
+    return unitsNumber;  
+}
+
+int GiveMeRandomNumber(int lowerLimit, int upperLimit)
+{
+    int randomNumber;
+    randomNumber = random(lowerLimit, upperLimit + 1);
+    return randomNumber;
 }
