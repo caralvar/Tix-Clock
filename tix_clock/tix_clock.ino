@@ -13,6 +13,7 @@ void SetOutputPins(int[], int);
 int GetTensFromNumber(int);
 int GetUnitsFromNumber(int);
 int GiveMeRandomNumber(int, int);
+int AddOneBasedOnInput(int, int);
 
 void setup() 
 {
@@ -23,7 +24,7 @@ void setup()
 
 void loop() 
 {
-  
+    
 }
   
 void SetInputPins(int inputPins[], int numberOfInputPins)
@@ -40,6 +41,15 @@ void SetOutputPins(int outputPins[], int numberOfPins)
     {
         pinMode(outputPins[i], OUTPUT);
     }
+}
+
+int AddOneBasedOnInput(int inputPin, int numberToUpdate)
+{
+    if (digitalRead(inputPin))
+    {
+        numberToUpdate++; 
+    }
+    return(numberToUpdate);
 }
 
 int GetTensFromNumber(int number)
