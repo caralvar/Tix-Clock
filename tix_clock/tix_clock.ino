@@ -17,7 +17,8 @@ int GetTensFromNumber(int);
 int GetUnitsFromNumber(int);
 int GiveMeRandomNumber(int, int);
 int AddOneBasedOnInput(int, int);
-
+void UpdateClock();
+  
 void setup() 
 {
     SetInputPins(INPUT_PINS, NUMBER_OF_INPUT_PINS);
@@ -27,7 +28,7 @@ void setup()
 
 void loop() 
 {
-    
+
 }
   
 void SetInputPins(int inputPins[], int numberOfInputPins)
@@ -74,4 +75,24 @@ int GiveMeRandomNumber(int lowerLimit, int upperLimit)
     int randomNumber;
     randomNumber = random(lowerLimit, upperLimit + 1);
     return randomNumber;
+}
+void UpdateClock() 
+{
+    second = second + 1;
+    if(second == 60)
+    {
+        second = 0;
+        minute = minute + 1;
+        
+    }  
+    if(minute == 60)
+    {
+        minute = 0;
+        hour = hour + 1;  
+    }  
+    if (hour == 25)
+    {
+        hour = 0;  
+    }
+  
 }
