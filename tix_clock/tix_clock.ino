@@ -8,10 +8,10 @@ const int LATCH_PIN = 3;
 const int CLOCK_PIN = 4;
 const int NUMBER_OF_OUTPUT_PINS = 3;
 int OUTPUT_PINS[] = {DATA_PIN, LATCH_PIN, CLOCK_PIN};
-const int SECONDS_PERIOD_IN_MS = 250;
+const int SECONDS_PERIOD_IN_MS = 1000;
 int hour = 0;
 int minute = 0;
-int second = 58;
+int second = 0;
 
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
@@ -32,7 +32,7 @@ void loop()
 {
     if (digitalRead(MODIFY_HOUR_PIN))
     {
-        second = 0;
+        second = -1;
         hour = AddOneBasedOnInput(HOURS_BUTTON_PIN, hour);
         minute = AddOneBasedOnInput(MINUTES_BUTTON_PIN, minute);    
     } 
