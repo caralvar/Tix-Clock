@@ -32,13 +32,16 @@ void loop()
 {
     if (digitalRead(MODIFY_HOUR_PIN))
     {
+        second = -1;
         hour = AddOneBasedOnInput(HOURS_BUTTON_PIN, hour);
         minute = AddOneBasedOnInput(MINUTES_BUTTON_PIN, minute);    
     } 
-    Serial.print("Hora: ");
-    Serial.println(hour);
-    Serial.print("Minutos: ");
-    Serial.println(minute);
+    UpdateClock();
+    Serial.print(hour);
+    Serial.print(" : ");
+    Serial.print(minute);
+    Serial.print(" : ");
+    Serial.println(second);
     delay(SECONDS_PERIOD_IN_MS);      
 }
 
