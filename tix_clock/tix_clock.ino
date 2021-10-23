@@ -94,5 +94,4 @@ void UpdateClock()
     {
         hour = 0;  
     }
-  
 }
