@@ -9,6 +9,7 @@ const int CLOCK_PIN = 4;
 const int NUMBER_OF_OUTPUT_PINS = 3;
 int OUTPUT_PINS[] = {DATA_PIN, LATCH_PIN, CLOCK_PIN};
 const int SECONDS_PERIOD_IN_MS = 1000;
+const int SQUARE_MATRIX_SIZE = 8;
 int hour = 0;
 int minute = 0;
 int second = 0;
@@ -16,6 +17,16 @@ int hourTens = 0;
 int hourUnits = 0;
 int minuteTens = 0;
 int minuteUnits = 0;
+int tixClock[SQUARE_MATRIX_SIZE][SQUARE_MATRIX_SIZE] = {
+                                           {0,0,0,0,0,0,0,0},
+                                           {0,0,0,0,0,0,0,0},
+                                           {0,0,0,0,0,0,0,0},
+                                           {0,0,0,0,0,0,0,0},
+                                           {0,0,0,0,0,0,0,0},
+                                           {0,0,0,0,0,0,0,0},
+                                           {0,0,0,0,0,0,0,0},
+                                           {0,0,0,0,0,0,0,0},
+  }
 
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
