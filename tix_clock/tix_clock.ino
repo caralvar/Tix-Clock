@@ -17,16 +17,29 @@ int hourTens = 0;
 int hourUnits = 0;
 int minuteTens = 0;
 int minuteUnits = 0;
-int tixClock[SQUARE_MATRIX_SIZE][SQUARE_MATRIX_SIZE] = {
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-  }
+int tixClock[SQUARE_MATRIX_SIZE][SQUARE_MATRIX_SIZE] = {{0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0}};
+int minuteTensPossibleLeds[6][2] = {{5,1},
+                                    {5,2},
+                                    {6,1},
+                                    {6,2},
+                                    {7,1},
+                                    {7,2}};
+int minuteUnitsPossibleLeds[9][2] = {{5,4},
+                                     {5,5},
+                                     {5,6},
+                                     {6,4},
+                                     {6,5},
+                                     {6,6},
+                                     {7,4},
+                                     {7,5},
+                                     {7,6}};
 
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
