@@ -82,15 +82,14 @@ void UpdateClock()
     if(second == 60)
     {
         second = 0;
-        minute = minute + 1;
-        
+        minute = minute + 1; 
     }  
     if(minute == 60)
     {
         minute = 0;
         hour = hour + 1;  
     }  
-    if (hour == 25)
+    if (hour == 24)
     {
         hour = 0;  
     }
