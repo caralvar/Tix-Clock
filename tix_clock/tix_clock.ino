@@ -12,6 +12,10 @@ const int SECONDS_PERIOD_IN_MS = 1000;
 int hour = 0;
 int minute = 0;
 int second = 0;
+int hourTens = 0;
+int hourUnits = 0;
+int minuteTens = 0;
+int minuteUnits = 0;
 
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
@@ -42,7 +46,21 @@ void loop()
     Serial.print(minute);
     Serial.print(" : ");
     Serial.println(second);
-    delay(SECONDS_PERIOD_IN_MS);      
+  
+    //Getting digite from clock
+    hourTens = GetTensFromNumber(hour);
+    hourUnits = GetUnitsFromNumber(hour);
+    minuteTens = GetTensFromNumber(minute);
+    minuteUnits = GetUnitsFromNumber(minute);
+    Serial.print("HourTens: ");
+    Serial.print(hourTens);
+    Serial.print(" HourUnits: ");
+    Serial.print(hourUnits);
+    Serial.print(" MinuteTens: ");
+    Serial.print(minuteTens);
+    Serial.print(" MinuteUnits: ");
+    Serial.println(minuteUnits);
+    delay(SECONDS_PERIOD_IN_MS);
 }
 
 void SetInputPins(int inputPins[], int numberOfInputPins)
