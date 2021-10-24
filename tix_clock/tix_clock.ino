@@ -34,6 +34,7 @@ int hourTensPossibleleds[hourTensNumberOfPossibleLeds][2] = {{0,1},
 };
 int hourUnitsPossibleleds[hourUnitsNumberOfPossibleLeds][2] = {{0,4},
                                                                {0,5},
+                                                               {0,6},
                                                                {1,4},
                                                                {1,5},
                                                                {1,6},
