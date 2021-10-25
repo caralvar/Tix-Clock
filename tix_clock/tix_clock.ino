@@ -12,6 +12,8 @@ const int SECONDS_PERIOD_IN_MS = 1000;
 const int SQUARE_MATRIX_SIZE = 8;
 const int hourTensNumberOfPossibleLeds = 2;
 const int hourUnitsNumberOfPossibleLeds = 9;
+const int minuteTensNumberOfPossibleLeds = 6;
+const int minuteUnitsNumberOfPossibleLeds = 9;
 int hour = 0;
 int minute = 0;
 int second = 0;
@@ -19,19 +21,16 @@ int hourTens = 0;
 int hourUnits = 0;
 int minuteTens = 0;
 int minuteUnits = 0;
-int tixClock[SQUARE_MATRIX_SIZE][SQUARE_MATRIX_SIZE] = {
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-                                           {0,0,0,0,0,0,0,0},
-};
+int tixClock[SQUARE_MATRIX_SIZE][SQUARE_MATRIX_SIZE] = {{0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0},
+                                                        {0,0,0,0,0,0,0,0}};
 int hourTensPossibleleds[hourTensNumberOfPossibleLeds][2] = {{0,1},
-                                                            {1,0},                                                         
-};
+                                                             {1,0}};
 int hourUnitsPossibleleds[hourUnitsNumberOfPossibleLeds][2] = {{0,4},
                                                                {0,5},
                                                                {0,6},
@@ -40,8 +39,22 @@ int hourUnitsPossibleleds[hourUnitsNumberOfPossibleLeds][2] = {{0,4},
                                                                {1,6},
                                                                {2,4},
                                                                {2,5},
-                                                               {2,6},                                                                                                                                                                                       
-};
+                                                               {2,6}};
+int minuteTensPossibleLeds[6][2] = {{5,1},
+                                    {5,2},
+                                    {6,1},
+                                    {6,2},
+                                    {7,1},
+                                    {7,2}};
+int minuteUnitsPossibleLeds[9][2] = {{5,4},
+                                     {5,5},
+                                     {5,6},
+                                     {6,4},
+                                     {6,5},
+                                     {6,6},
+                                     {7,4},
+                                     {7,5},
+                                     {7,6}};
 
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
