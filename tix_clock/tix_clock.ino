@@ -138,3 +138,7 @@ void UpdateClock()
         hour = 0;  
     }
 }
+
+void ClearClock (int[SQUARE_MATRIX_SIZE][SQUARE_MATRIX_SIZE], int numberOfRows, int numberOfColumns){
+  
+}
