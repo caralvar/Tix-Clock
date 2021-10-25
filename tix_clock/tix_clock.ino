@@ -56,7 +56,6 @@ int minuteUnitsPossibleLeds[9][2] = {{5,4},
                                      {7,5},
                                      {7,6}};
 
-void PrintEightByEightMatrix(int[][8]);
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
 int GetTensFromNumber(int);
@@ -64,6 +63,9 @@ int GetUnitsFromNumber(int);
 int GiveMeRandomNumber(int, int);
 int AddOneBasedOnInput(int, int);
 void UpdateClock();
+void PrintEightByEightMatrix(int[][8]);
+void PrintIntArray(int[], int);
+
   
 void setup() 
 {
@@ -173,12 +175,21 @@ void PrintEightByEightMatrix(int matrix[8][8])
 {
     for(int i = 0; i < 8; i++)
     {
-       
         for(int j = 0; j < 8; j++)
         {    
             Serial.print(matrix[i][j]);
         } 
         Serial.println();
+    }
+    Serial.println();
+}
+
+void PrintIntArray(int array[], int lenght)
+{  
+    for(int i = 0; i < lenght; i++)
+    {
+        Serial.print(array[i]);
+        Serial.print(",");
     }
     Serial.println();
 }
