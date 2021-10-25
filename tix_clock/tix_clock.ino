@@ -139,6 +139,14 @@ void UpdateClock()
     }
 }
 
-void ClearClock (int[SQUARE_MATRIX_SIZE][SQUARE_MATRIX_SIZE], int numberOfRows, int numberOfColumns){
-  
-}
+
+void ZeroOutEightByEightMatrix (int matrix[8][8])
+{
+    for(int i = 0; i < 8; i++)
+    {
+        for(int j = 0; j < 8; j++)
+        {
+            matrix[i][j] = 0;
+        }
+    }
+ }
