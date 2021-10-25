@@ -56,6 +56,7 @@ int minuteUnitsPossibleLeds[9][2] = {{5,4},
                                      {7,5},
                                      {7,6}};
 
+void ZeroOutEightByEightMatrix (int[][8]);
 void PrintEightByEightMatrix(int[][8]);
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
