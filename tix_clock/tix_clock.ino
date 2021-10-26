@@ -196,3 +196,12 @@ bool IsIntegerInArray(int array[], int lenght, int numberToCheck)
     return false;  
 }
 
+void PrintIntArray(int array[], int lenght)
+{  
+    for(int i = 0; i < lenght; i++)
+    {
+        Serial.print(array[i]);
+        Serial.print(",");
+    }
+    Serial.println();
+}
