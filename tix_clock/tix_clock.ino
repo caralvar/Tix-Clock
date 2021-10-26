@@ -65,6 +65,7 @@ int AddOneBasedOnInput(int, int);
 void UpdateClock();
 void PrintEightByEightMatrix(int[][8]);
 void PrintIntArray(int[], int);
+void ZeroOutEightByEightMatrix (int[][8]);
 bool IsIntegerInArray(int [], int, int);
 
 void setup() 
@@ -204,4 +205,15 @@ void PrintIntArray(int array[], int lenght)
         Serial.print(",");
     }
     Serial.println();
+}
+
+void ZeroOutEightByEightMatrix (int matrix[8][8])
+{
+    for(int i = 0; i < 8; i++)
+    {
+        for(int j = 0; j < 8; j++)
+        {
+            matrix[i][j] = 0;
+        }
+    }
 }
