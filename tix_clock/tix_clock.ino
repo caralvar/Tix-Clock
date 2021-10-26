@@ -56,6 +56,7 @@ int minuteUnitsPossibleLeds[9][2] = {{5,4},
                                      {7,5},
                                      {7,6}};
 
+void ZeroOutEightByEightMatrix (int[][8]);
 void PrintEightByEightMatrix(int[][8]);
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
@@ -182,3 +183,15 @@ void PrintEightByEightMatrix(int matrix[8][8])
     }
     Serial.println();
 }
+
+
+void ZeroOutEightByEightMatrix (int matrix[8][8])
+{
+    for(int i = 0; i < 8; i++)
+    {
+        for(int j = 0; j < 8; j++)
+        {
+            matrix[i][j] = 0;
+        }
+    }
+ }
