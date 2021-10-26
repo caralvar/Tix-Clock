@@ -67,6 +67,8 @@ void PrintEightByEightMatrix(int[][8]);
 void PrintIntArray(int[], int);
 void ZeroOutEightByEightMatrix (int[][8]);
 bool IsIntegerInArray(int [], int, int);
+byte ConvertEightByEightArrayToByte(int[]);
+
 
 void setup() 
 {
@@ -216,4 +218,15 @@ void ZeroOutEightByEightMatrix (int matrix[8][8])
             matrix[i][j] = 0;
         }
     }
+}
+
+byte ConvertEightByEightArrayToByte(int array[])
+{
+  byte resultingByte = 0;
+    for(int j = 0; j < 8; j++)
+    {
+      resultingByte = resultingByte << 1;  
+      resultingByte = resultingByte + array[j];     
+    }
+    return resultingByte;
 }
