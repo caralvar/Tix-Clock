@@ -65,6 +65,7 @@ int AddOneBasedOnInput(int, int);
 void UpdateClock();
 void PrintEightByEightMatrix(int[][8]);
 void PrintIntArray(int[], int);
+void ZeroOutEightByEightMatrix (int[][8]);
 bool IsIntegerInArray(int [], int, int);
 
 void setup() 
@@ -103,6 +104,7 @@ void loop()
     Serial.print(" MinuteUnits: ");
     Serial.println(minuteUnits);
     PrintEightByEightMatrix(tixClock);
+    delay(SECONDS_PERIOD_IN_MS);
 }
 
 void SetInputPins(int inputPins[], int numberOfInputPins)
@@ -183,7 +185,29 @@ void PrintEightByEightMatrix(int matrix[8][8])
     Serial.println();
 }
 
-bool IsIntegerInArray(int array[], int lenght, int numberToCheck)
+void PrintIntArray(int array[], int lenght)
+{  
+    for(int i = 0; i < lenght; i++)
+    {
+        Serial.print(array[i]);
+        Serial.print(",");
+    }
+    Serial.println();
+}
+
+
+void ZeroOutEightByEightMatrix (int matrix[8][8])
+{
+    for(int i = 0; i < 8; i++)
+    {
+        for(int j = 0; j < 8; j++)
+        {
+            matrix[i][j] = 0;
+        }
+    }
+ }
+ 
+ bool IsIntegerInArray(int array[], int lenght, int numberToCheck)
 {
     for(int i = 0; i < lenght; i++)
     {
