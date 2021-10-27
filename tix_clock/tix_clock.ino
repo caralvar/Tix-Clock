@@ -70,6 +70,7 @@ bool IsIntegerInArray(int [], int, int);
 void LightUpChosenLeds(int , int , int [][2], int [][8]);
 byte ConvertEightByEightArrayToByte(int []);
 void ShiftOutEightByEightMatrixScreen(int [][8], int, int, int);
+void FillArrayWithInteger(int [], int, int);
 
 void setup() 
 {
@@ -271,4 +272,12 @@ void ShiftOutEightByEightMatrixScreen(int matrix[][8], int clockPin, int dataPin
         shiftOut(dataPin, clockPin, MSBFIRST, rowData);
         digitalWrite(latchPin,HIGH);
     }
+}
+
+void FillArrayWithInteger(int arrayToFill[], int arrayLength, int number)
+{
+    for (int i = 0; i < arrayLength; i++)
+    {
+        arrayToFill[i] = number;  
+    }  
 }
