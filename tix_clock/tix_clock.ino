@@ -67,8 +67,8 @@ void PrintEightByEightMatrix(int[][8]);
 void PrintIntArray(int[], int);
 void ZeroOutEightByEightMatrix (int[][8]);
 bool IsIntegerInArray(int [], int, int);
+void LightUpChosenLeds(int , int , int [][2], int [][8]);
 byte ConvertEightByEightArrayToByte(int[]);
-
 
 void setup() 
 {
@@ -105,6 +105,12 @@ void loop()
     Serial.print(minuteTens);
     Serial.print(" MinuteUnits: ");
     Serial.println(minuteUnits);
+  
+    ZeroOutEightByEightMatrix(tixClock);
+    LightUpChosenLeds(hourTens, hourTensNumberOfPossibleLeds, hourTensPossibleleds, tixClock);
+    LightUpChosenLeds(hourUnits, hourUnitsNumberOfPossibleLeds, hourUnitsPossibleleds, tixClock);
+    LightUpChosenLeds(minuteTens, minuteTensNumberOfPossibleLeds, minuteTensPossibleLeds, tixClock);
+    LightUpChosenLeds(minuteUnits, minuteUnitsNumberOfPossibleLeds, minuteUnitsPossibleLeds, tixClock);
     PrintEightByEightMatrix(tixClock);
 }
 
@@ -217,6 +223,29 @@ void ZeroOutEightByEightMatrix (int matrix[8][8])
         {
             matrix[i][j] = 0;
         }
+    }
+}
+
+void LightUpChosenLeds(int numberOfLedsToChoose, int numberOfPossibleLeds, int ledsCoordinates[][2], int ledMatrix[][8])
+{
+    int chosenLeds[numberOfPossibleLeds];                                  //Makes an array of the possibles leds 
+    int numberOfChosenLeds = 0;                                            //Defines the number of chosen leds yo 0
+    while(numberOfChosenLeds < numberOfLedsToChoose)                       //Makes what is in the while if number of chosen leds is minor of number of leds to chose 
+    {
+        int randomNumber = GiveMeRandomNumber(0, numberOfPossibleLeds - 1);   //makes the number random based on the number of possible leds 
+        if (!IsIntegerInArray(chosenLeds, numberOfLedsToChoose, randomNumber))//If in the array the random led isnt it will add it to the array and if it is in the array in will continue the code
+        {
+          chosenLeds[numberOfChosenLeds] = randomNumber;                   // adds the number to the array
+            numberOfChosenLeds++;                                            //plus 1 to the number of chosen leds
+        }
+    }
+  
+  for(int i = 0; i < numberOfLedsToChoose; i++)                           //if the variable i is less than number of leds to choose it will do the code that is inside the for.
+    {
+    int chosenLed = chosenLeds[i];                                     //The variable of chossen led equals of chosen leds that has the variable i 
+      int chosenRow = ledsCoordinates[chosenLed][0];                     //Gives the coordinates of the row 
+        int chosenColumn = ledsCoordinates[chosenLed][1];                  //Gives the coordinates of the columms 
+        ledMatrix[chosenRow][chosenColumn] = 1;                            //Here it will put in the matrix and put a 1 
     }
 }
 
