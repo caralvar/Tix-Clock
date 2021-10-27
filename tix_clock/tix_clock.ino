@@ -8,7 +8,9 @@ const int LATCH_PIN = 3;
 const int CLOCK_PIN = 4;
 const int NUMBER_OF_OUTPUT_PINS = 3;
 int OUTPUT_PINS[] = {DATA_PIN, LATCH_PIN, CLOCK_PIN};
-const int SECONDS_PERIOD_IN_MS = 1000;
+const int ONE_SECOND_PERIOD = 500;
+const int CHANGE_CLOCK_OUTPUT_PERIOD = ONE_SECOND_PERIOD * 5;
+const int SCREEN_REFRESH_PERIOD = 30;
 const int SQUARE_MATRIX_SIZE = 8;
 const int hourTensNumberOfPossibleLeds = 2;
 const int hourUnitsNumberOfPossibleLeds = 9;
@@ -21,6 +23,7 @@ int hourTens = 0;
 int hourUnits = 0;
 int minuteTens = 0;
 int minuteUnits = 0;
+int loopCounter = 0;
 int tixClock[SQUARE_MATRIX_SIZE][SQUARE_MATRIX_SIZE] = {{0,0,0,0,0,0,0,0},
                                                         {0,0,0,0,0,0,0,0},
                                                         {0,0,0,0,0,0,0,0},
@@ -81,40 +84,33 @@ void setup()
 
 void loop() 
 {
-    if (digitalRead(MODIFY_HOUR_PIN))
+    if ((digitalRead(MODIFY_HOUR_PIN) && (loopCounter % ONE_SECOND_PERIOD == 0)) || (loopCounter % CHANGE_CLOCK_OUTPUT_PERIOD == 0))
     {
-        second = -1;
-        hour = AddOneBasedOnInput(HOURS_BUTTON_PIN, hour);
-        minute = AddOneBasedOnInput(MINUTES_BUTTON_PIN, minute);    
-    } 
-    UpdateClock();
-    Serial.print(hour);
-    Serial.print(" : ");
-    Serial.print(minute);
-    Serial.print(" : ");
-    Serial.println(second);
-  
-    //Getting digite from clock
-    hourTens = GetTensFromNumber(hour);
-    hourUnits = GetUnitsFromNumber(hour);
-    minuteTens = GetTensFromNumber(minute);
-    minuteUnits = GetUnitsFromNumber(minute);
-    Serial.print("HourTens: ");
-    Serial.print(hourTens);
-    Serial.print(" HourUnits: ");
-    Serial.print(hourUnits);
-    Serial.print(" MinuteTens: ");
-    Serial.print(minuteTens);
-    Serial.print(" MinuteUnits: ");
-    Serial.println(minuteUnits);
-  
-    ZeroOutEightByEightMatrix(tixClock);
-    LightUpChosenLeds(hourTens, hourTensNumberOfPossibleLeds, hourTensPossibleleds, tixClock);
-    LightUpChosenLeds(hourUnits, hourUnitsNumberOfPossibleLeds, hourUnitsPossibleleds, tixClock);
-    LightUpChosenLeds(minuteTens, minuteTensNumberOfPossibleLeds, minuteTensPossibleLeds, tixClock);
-    LightUpChosenLeds(minuteUnits, minuteUnitsNumberOfPossibleLeds, minuteUnitsPossibleLeds, tixClock);
-    PrintEightByEightMatrix(tixClock);
+        hourTens = GetTensFromNumber(hour);
+        hourUnits = GetUnitsFromNumber(hour);
+        minuteTens = GetTensFromNumber(minute);
+        minuteUnits = GetUnitsFromNumber(minute);
+        ZeroOutEightByEightMatrix(tixClock);
+        LightUpChosenLeds(hourTens, hourTensNumberOfPossibleLeds, hourTensPossibleleds, tixClock);
+        LightUpChosenLeds(hourUnits, hourUnitsNumberOfPossibleLeds, hourUnitsPossibleleds, tixClock);
+        LightUpChosenLeds(minuteTens, minuteTensNumberOfPossibleLeds, minuteTensPossibleLeds, tixClock);
+        LightUpChosenLeds(minuteUnits, minuteUnitsNumberOfPossibleLeds, minuteUnitsPossibleLeds, tixClock);
+        if (digitalRead(MODIFY_HOUR_PIN))
+        {
+            second = -1;
+            hour = AddOneBasedOnInput(HOURS_BUTTON_PIN, hour);
+            minute = AddOneBasedOnInput(MINUTES_BUTTON_PIN, minute);
+             
+        } 
+    }
+    if (loopCounter % ONE_SECOND_PERIOD == 0)
+    {
+        UpdateClock();
+    }
+    ShiftOutEightByEightMatrixScreen(tixClock, CLOCK_PIN, DATA_PIN, LATCH_PIN);
+    loopCounter++;
 }
+
 
 void SetInputPins(int inputPins[], int numberOfInputPins)
 {
