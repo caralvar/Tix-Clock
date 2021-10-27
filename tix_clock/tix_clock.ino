@@ -69,6 +69,7 @@ void ZeroOutEightByEightMatrix (int[][8]);
 bool IsIntegerInArray(int [], int, int);
 void LightUpChosenLeds(int , int , int [][2], int [][8]);
 byte ConvertEightByEightArrayToByte(int []);
+void ShiftOutEightByEightMatrixScreen(int [][8], int, int, int);
 
 void setup() 
 {
@@ -257,4 +258,17 @@ byte ConvertEightByEightArrayToByte(int array[])
         resultingByte = resultingByte + array[j];     
     }
     return resultingByte;
+}
+
+void ShiftOutEightByEightMatrixScreen(int matrix[][8], int clockPin, int dataPin, int latchPin)
+{
+    for(int j = 0; j < 8; j++)
+    {
+        digitalWrite(latchPin,LOW);
+        byte rowData = 128 >> j;
+        byte columnData = ~ConvertEightByEightArrayToByte(matrix[j]);
+        shiftOut(dataPin, clockPin, MSBFIRST, columnData);
+        shiftOut(dataPin, clockPin, MSBFIRST, rowData);
+        digitalWrite(latchPin,HIGH);
+    }
 }
