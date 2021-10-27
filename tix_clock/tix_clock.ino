@@ -1,3 +1,4 @@
+//VARIABLES
 const int MINUTES_BUTTON_PIN = 5;
 const int HOURS_BUTTON_PIN = 6;
 const int MODIFY_HOUR_PIN = 7;
@@ -56,6 +57,7 @@ int minuteUnitsPossibleLeds[9][2] = {{5,4},
                                      {7,5},
                                      {7,6}};
 
+//PROTOTYPES
 void SetInputPins(int[], int);
 void SetOutputPins(int[], int);
 int GetTensFromNumber(int);
@@ -69,6 +71,7 @@ void ZeroOutEightByEightMatrix (int[][8]);
 bool IsIntegerInArray(int [], int, int);
 byte ConvertEightByEightArrayToByte(int[]);
 void ShiftOutEightByEightMatrixScreen(int [][8], int, int, int);
+void FillArrayWithInteger(int[], int, int);
 
 void setup() 
 {
@@ -108,6 +111,7 @@ void loop()
     PrintEightByEightMatrix(tixClock);
 }
 
+//FUNCTION
 void SetInputPins(int inputPins[], int numberOfInputPins)
 {
     for (int i = 0; i < numberOfInputPins; i++)
@@ -222,13 +226,13 @@ void ZeroOutEightByEightMatrix (int matrix[8][8])
 
 byte ConvertEightByEightArrayToByte(int array[])
 {
-  byte resultingByte = 0;
-    for(int j = 0; j < 8; j++)
-    {
-      resultingByte = resultingByte << 1;  
-      resultingByte = resultingByte + array[j];     
-    }
-    return resultingByte;
+     byte resultingByte = 0;
+     for(int j = 0; j < 8; j++)
+     {
+         resultingByte = resultingByte << 1;  
+         resultingByte = resultingByte + array[j];     
+     }
+     return resultingByte;
 }
 
 void ShiftOutEightByEightMatrixScreen(int matrix[][8], int clockPin, int dataPin, int latchPin)
@@ -242,4 +246,12 @@ void ShiftOutEightByEightMatrixScreen(int matrix[][8], int clockPin, int dataPin
         shiftOut(dataPin, clockPin, MSBFIRST, rowData);
         digitalWrite(latchPin,HIGH);
     }
+}
+
+void FillArrayWithInteger(int arrayToFill[], int arrayLength, int number)
+{
+    for (int i = 0; i < arrayLength; i++)
+    {
+        arrayToFill[i] = number;  
+    }  
 }
