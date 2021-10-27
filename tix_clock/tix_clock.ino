@@ -8,7 +8,9 @@ const int LATCH_PIN = 3;
 const int CLOCK_PIN = 4;
 const int NUMBER_OF_OUTPUT_PINS = 3;
 int OUTPUT_PINS[] = {DATA_PIN, LATCH_PIN, CLOCK_PIN};
-const int SECONDS_PERIOD_IN_MS = 1000;
+const int ONE_SECOND_PERIOD = 500;
+const int CHANGE_CLOCK_OUTPUT_PERIOD = ONE_SECOND_PERIOD * 5;
+const int SCREEN_REFRESH_PERIOD = 30;
 const int SQUARE_MATRIX_SIZE = 8;
 const int hourTensNumberOfPossibleLeds = 2;
 const int hourUnitsNumberOfPossibleLeds = 9;
@@ -21,6 +23,7 @@ int hourTens = 0;
 int hourUnits = 0;
 int minuteTens = 0;
 int minuteUnits = 0;
+int loopCounter = 0;
 int tixClock[SQUARE_MATRIX_SIZE][SQUARE_MATRIX_SIZE] = {{0,0,0,0,0,0,0,0},
                                                         {0,0,0,0,0,0,0,0},
                                                         {0,0,0,0,0,0,0,0},
@@ -68,6 +71,9 @@ void PrintIntArray(int[], int);
 void ZeroOutEightByEightMatrix (int[][8]);
 bool IsIntegerInArray(int [], int, int);
 void LightUpChosenLeds(int , int , int [][2], int [][8]);
+byte ConvertEightByEightArrayToByte(int []);
+void ShiftOutEightByEightMatrixScreen(int [][8], int, int, int);
+void FillArrayWithInteger(int [], int, int);
 
 void setup() 
 {
@@ -78,40 +84,33 @@ void setup()
 
 void loop() 
 {
-    if (digitalRead(MODIFY_HOUR_PIN))
+    if ((digitalRead(MODIFY_HOUR_PIN) && (loopCounter % ONE_SECOND_PERIOD == 0)) || (loopCounter % CHANGE_CLOCK_OUTPUT_PERIOD == 0))
     {
-        second = -1;
-        hour = AddOneBasedOnInput(HOURS_BUTTON_PIN, hour);
-        minute = AddOneBasedOnInput(MINUTES_BUTTON_PIN, minute);    
-    } 
-    UpdateClock();
-    Serial.print(hour);
-    Serial.print(" : ");
-    Serial.print(minute);
-    Serial.print(" : ");
-    Serial.println(second);
-  
-    //Getting digite from clock
-    hourTens = GetTensFromNumber(hour);
-    hourUnits = GetUnitsFromNumber(hour);
-    minuteTens = GetTensFromNumber(minute);
-    minuteUnits = GetUnitsFromNumber(minute);
-    Serial.print("HourTens: ");
-    Serial.print(hourTens);
-    Serial.print(" HourUnits: ");
-    Serial.print(hourUnits);
-    Serial.print(" MinuteTens: ");
-    Serial.print(minuteTens);
-    Serial.print(" MinuteUnits: ");
-    Serial.println(minuteUnits);
-  
-    ZeroOutEightByEightMatrix(tixClock);
-    LightUpChosenLeds(hourTens, hourTensNumberOfPossibleLeds, hourTensPossibleleds, tixClock);
-    LightUpChosenLeds(hourUnits, hourUnitsNumberOfPossibleLeds, hourUnitsPossibleleds, tixClock);
-    LightUpChosenLeds(minuteTens, minuteTensNumberOfPossibleLeds, minuteTensPossibleLeds, tixClock);
-    LightUpChosenLeds(minuteUnits, minuteUnitsNumberOfPossibleLeds, minuteUnitsPossibleLeds, tixClock);
-    PrintEightByEightMatrix(tixClock);
+        hourTens = GetTensFromNumber(hour);
+        hourUnits = GetUnitsFromNumber(hour);
+        minuteTens = GetTensFromNumber(minute);
+        minuteUnits = GetUnitsFromNumber(minute);
+        ZeroOutEightByEightMatrix(tixClock);
+        LightUpChosenLeds(hourTens, hourTensNumberOfPossibleLeds, hourTensPossibleleds, tixClock);
+        LightUpChosenLeds(hourUnits, hourUnitsNumberOfPossibleLeds, hourUnitsPossibleleds, tixClock);
+        LightUpChosenLeds(minuteTens, minuteTensNumberOfPossibleLeds, minuteTensPossibleLeds, tixClock);
+        LightUpChosenLeds(minuteUnits, minuteUnitsNumberOfPossibleLeds, minuteUnitsPossibleLeds, tixClock);
+        if (digitalRead(MODIFY_HOUR_PIN))
+        {
+            second = -1;
+            hour = AddOneBasedOnInput(HOURS_BUTTON_PIN, hour);
+            minute = AddOneBasedOnInput(MINUTES_BUTTON_PIN, minute);
+             
+        } 
+    }
+    if (loopCounter % ONE_SECOND_PERIOD == 0)
+    {
+        UpdateClock();
+    }
+    ShiftOutEightByEightMatrixScreen(tixClock, CLOCK_PIN, DATA_PIN, LATCH_PIN);
+    loopCounter++;
 }
+
 
 void SetInputPins(int inputPins[], int numberOfInputPins)
 {
@@ -227,23 +226,57 @@ void ZeroOutEightByEightMatrix (int matrix[8][8])
 
 void LightUpChosenLeds(int numberOfLedsToChoose, int numberOfPossibleLeds, int ledsCoordinates[][2], int ledMatrix[][8])
 {
-    int chosenLeds[numberOfPossibleLeds];                                  //Makes an array of the possibles leds 
+    int chosenLeds[numberOfPossibleLeds];                                 //Makes an array of the possibles leds 
+    FillArrayWithInteger(chosenLeds, numberOfPossibleLeds, 42);
     int numberOfChosenLeds = 0;                                            //Defines the number of chosen leds yo 0
+    int randomNumber;
     while(numberOfChosenLeds < numberOfLedsToChoose)                       //Makes what is in the while if number of chosen leds is minor of number of leds to chose 
     {
-        int randomNumber = GiveMeRandomNumber(0, numberOfPossibleLeds - 1);   //makes the number random based on the number of possible leds 
+        randomNumber = GiveMeRandomNumber(0, numberOfPossibleLeds - 1);   //makes the number random based on the number of possible leds 
         if (!IsIntegerInArray(chosenLeds, numberOfLedsToChoose, randomNumber))//If in the array the random led isnt it will add it to the array and if it is in the array in will continue the code
         {
-          chosenLeds[numberOfChosenLeds] = randomNumber;                   // adds the number to the array
+            chosenLeds[numberOfChosenLeds] = randomNumber;                   // adds the number to the array
             numberOfChosenLeds++;                                            //plus 1 to the number of chosen leds
         }
     }
   
   for(int i = 0; i < numberOfLedsToChoose; i++)                           //if the variable i is less than number of leds to choose it will do the code that is inside the for.
     {
-    int chosenLed = chosenLeds[i];                                     //The variable of chossen led equals of chosen leds that has the variable i 
-      int chosenRow = ledsCoordinates[chosenLed][0];                     //Gives the coordinates of the row 
+        int chosenLed = chosenLeds[i];                                     //The variable of chossen led equals of chosen leds that has the variable i 
+        int chosenRow = ledsCoordinates[chosenLed][0];                     //Gives the coordinates of the row 
         int chosenColumn = ledsCoordinates[chosenLed][1];                  //Gives the coordinates of the columms 
         ledMatrix[chosenRow][chosenColumn] = 1;                            //Here it will put in the matrix and put a 1 
     }
+}
+
+byte ConvertEightByEightArrayToByte(int array[])
+{
+    byte resultingByte = 0;
+    for(int j = 0; j < 8; j++)
+    {
+        resultingByte = resultingByte << 1;  
+        resultingByte = resultingByte + array[j];     
+    }
+    return resultingByte;
+}
+
+void ShiftOutEightByEightMatrixScreen(int matrix[][8], int clockPin, int dataPin, int latchPin)
+{
+    for(int j = 0; j < 8; j++)
+    {
+        digitalWrite(latchPin,LOW);
+        byte rowData = 128 >> j;
+        byte columnData = ~ConvertEightByEightArrayToByte(matrix[j]);
+        shiftOut(dataPin, clockPin, MSBFIRST, columnData);
+        shiftOut(dataPin, clockPin, MSBFIRST, rowData);
+        digitalWrite(latchPin,HIGH);
+    }
+}
+
+void FillArrayWithInteger(int arrayToFill[], int arrayLength, int number)
+{
+    for (int i = 0; i < arrayLength; i++)
+    {
+        arrayToFill[i] = number;  
+    }  
 }
