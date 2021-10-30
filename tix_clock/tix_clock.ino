@@ -1,36 +1,4 @@
-const int MINUTES_BUTTON_PIN = 5;
-const int HOURS_BUTTON_PIN = 6;
-const int MODIFY_HOUR_PIN = 7;
-const int NUMBER_OF_INPUT_PINS = 3;
-int INPUT_PINS[] = {MINUTES_BUTTON_PIN, HOURS_BUTTON_PIN, MODIFY_HOUR_PIN};
-const int DATA_PIN = 2;
-const int LATCH_PIN = 3;
-const int CLOCK_PIN = 4;
-const int NUMBER_OF_OUTPUT_PINS = 3;
-int OUTPUT_PINS[] = {DATA_PIN, LATCH_PIN, CLOCK_PIN};
-const int ONE_SECOND_PERIOD = 500;
-const int CHANGE_CLOCK_OUTPUT_PERIOD = ONE_SECOND_PERIOD * 5;
-const int SCREEN_REFRESH_PERIOD = 30;
-const int SQUARE_MATRIX_SIZE = 8;
-const int hourTensNumberOfPossibleLeds = 2;
-const int hourUnitsNumberOfPossibleLeds = 9;
-const int minuteTensNumberOfPossibleLeds = 6;
-const int minuteUnitsNumberOfPossibleLeds = 9;
-int hour = 0;
-int minute = 0;
-int second = 0;
-int hourTens = 0;
-int hourUnits = 0;
-int minuteTens = 0;
-int minuteUnits = 0;
-int loopCounter = 0;
-int tixClock[SQUARE_MATRIX_SIZE][SQUARE_MATRIX_SIZE] = {{0,0,0,0,0,0,0,0},
-                                                        {0,0,0,0,0,0,0,0},
-                                                        {0,0,0,0,0,0,0,0},
-                                                        {0,0,0,0,0,0,0,0},
-                                                        {0,0,0,0,0,0,0,0},
-                                                        {0,0,0,0,0,0,0,0},
-              const int MINUTES_BUTTON_PIN = 5;                                                                     //Se definen los numeros de los pins de los botones
+const int MINUTES_BUTTON_PIN = 5;                                                                     //Se definen los numeros de los pins de los botones
 const int HOURS_BUTTON_PIN = 6;                                                                       
 const int MODIFY_HOUR_PIN = 7;                                                                        
 const int NUMBER_OF_INPUT_PINS = 3;                                                                   //Se define cuantos pines de entrada se van a utilizar                                                               
